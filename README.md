@@ -113,4 +113,13 @@ WHERE ST_DISTANCE(tPosition,CreatePoint(rLatitude,rLongitude)) <50
 ビルドして実行し、Tracking Startをクリックして、新しく開いたWindowのSendボタンをクリック後、ギターをマウスで動かすとその位置の緯度、経度が適宜Event Hubに通知されます。 
 
 ### Visual Studio 2017によるローカルテスト 
-Under Construction 
+Under Construction  
+- Visual Studio 2015を起動  
+- プロジェクト新規作成 → Stream Analyticsプロジェクト作成  
+- Inputをもう一つ作成（参照データ）
+- 元のInput、Outputを、クラウドにマップ  
+- Scriptを記載  
+- 二つのInputにローカルデータをマッピング  
+- ルートトラッキングは、MovingPointGeneratorWPFでサンプルデータ生成  
+- ”▶ Run Localy”で実行 
+- 結果表示される 

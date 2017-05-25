@@ -95,9 +95,10 @@ INTO Output
 FROM TP
 WHERE ST_DISTANCE(tPosition,CreatePoint(rLatitude,rLongitude)) <50
 ```
+と入力します。
 一旦、モバイルデバイスに紐づけられた定義済みの場所情報をジョインしてリストを作り、その後、50メートル以下のレコードを見つけ出します。GetArrayElements関数で配列をばらしています。CreatePoint関数で、緯度経度から場所変数を作り、ST_DISTANCE関数で二点間の距離をメートルで計算しています。 
 ※現状、一つのクエリでCreatePoint関数は一個しかコールできないようです。 
-このクエリは、query/Script.asaqlに入っています。 
+このクエリは、[query/Script.asaql](query/Script.asaql)に入っています。 
 ![MakeQuery](images/MakeQuery.png)
 
 これで、クラウド側のサービス作成・定義は完了です。後は、”実行”をクリックすれば実行開始します。
@@ -106,7 +107,7 @@ WHERE ST_DISTANCE(tPosition,CreatePoint(rLatitude,rLongitude)) <50
 ### 位置情報サンプル生成アプリ 
 [MovingPointGeneratorWPF](MovingPointGeneratorWPF)で公開しているSLNファイルをVisual Studioで開きます。TrackingLog.xamlファイルの24行目 
 ```xaml
-            <TextBox Name="tbEHCS" Grid.Column="2" Text="Service Bus Connection String" ToolTip="Event Hub Connection String"/>
+<TextBox Name="tbEHCS" Grid.Column="2" Text="Service Bus Connection String" ToolTip="Event Hub Connection String"/>
 ```
 のTextの値’Service Bus Connection String’を、Azure ポータルのEvent Hubの共有アクセスポリシーから得た接続文字列で置き換えます。 
 ビルドして実行し、Tracking Startをクリックして、新しく開いたWindowのSendボタンをクリック後、ギターをマウスで動かすとその位置の緯度、経度が適宜Event Hubに通知されます。 

@@ -1,0 +1,23 @@
+[
+  {
+    "ThingeeId": "Trip Guitor",
+    "places": [
+      {
+        "id": "Shimbashi Station",
+        "longitude": 139.758332,
+        "latitude": 35.666193
+      },
+      {
+        "id": "Park Tower Hotel",
+        "longitude": 139.747072,
+        "latitude": 35.655435
+      },
+      {
+        "id": "Tokyo Tower",
+        "longitude": 139.745433,
+        "latitude": 35.658581
+      }
+    ]
+  }
+]
+

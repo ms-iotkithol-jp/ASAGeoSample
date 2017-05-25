@@ -1,0 +1,16 @@
+WITH TP AS(
+ SELECT
+    CreatePoint(rt.latitude, rt.longitude) as tPosition,
+    rt.id as thingId, rt.trackingTime,
+    lplaces.ArrayValue.id as placeId,
+    lplaces.ArrayValue.latitude as rLatitude,
+    lplaces.ArrayValue.longitude as rLongitude
+ FROM RootTracking rt TIMESTAMP BY trackingTime
+ JOIN RegistedPlaces r on rt.id = r.ThingeeId
+ CROSS APPLY GetArrayElements(r.places) as lplaces
+)
+-- 50m以下の場所を探す
+SELECT *
+INTO Output
+FROM TP
+WHERE ST_DISTANCE(tPosition,CreatePoint(rLatitude,rLongitude)) <50

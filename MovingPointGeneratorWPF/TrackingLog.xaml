@@ -1,0 +1,30 @@
+﻿<Window x:Class="MovingPointGeneratorWPF.TrackingLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MovingPointGeneratorWPF"
+        mc:Ignorable="d"
+        Title="TrackingRog" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="To Event Hub"/>
+            <Button Name="buttonEH" Content="Send" Grid.Column="1" Margin="1" Click="buttonEH_Click"/>
+            <TextBox Name="tbEHCS" Grid.Column="2" Text="Service Bus Connection String" ToolTip="Event Hub Connection String"/>
+            <TextBox Name="tbEHName" Text="routetracking" ToolTip="Event Hub Name" Grid.Column="3"/>
+        </Grid>
+        <Button Name="buttonSave" Grid.Row="1" Content="Save to File" Margin="1" Click="buttonSave_Click"/>
+        <TextBlock Name="tbLog" Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+    </Grid>
+</Window>

@@ -85,7 +85,7 @@ WITH TP AS(
     lplaces.ArrayValue.id as placeId,
     lplaces.ArrayValue.latitude as rLatitude,
     lplaces.ArrayValue.longitude as rLongitude
- FROM RootTracking rt TIMESTAMP BY trackingTime
+ FROM TrackingPoint rt TIMESTAMP BY trackingTime
  JOIN RegistedPlaces r on rt.id = r.ThingeeId
  CROSS APPLY GetArrayElements(r.places) as lplaces
 )
@@ -113,13 +113,25 @@ WHERE ST_DISTANCE(tPosition,CreatePoint(rLatitude,rLongitude)) <50
 ビルドして実行し、Tracking Startをクリックして、新しく開いたWindowのSendボタンをクリック後、ギターをマウスで動かすとその位置の緯度、経度が適宜Event Hubに通知されます。 
 
 ### Visual Studio 2017によるローカルテスト 
-Under Construction  
-- Visual Studio 2015を起動  
-- プロジェクト新規作成 → Stream Analyticsプロジェクト作成  
-- Inputをもう一つ作成（参照データ）
-- 元のInput、Outputを、クラウドにマップ  
-- Scriptを記載  
-- 二つのInputにローカルデータをマッピング  
-- ルートトラッキングは、MovingPointGeneratorWPFでサンプルデータ生成  
-- ”▶ Run Localy”で実行 
-- 結果表示される 
+Visual Studio 2015を使って、ローカルでのテストを行います。クラウド上でやると結構めんどくさいし、スクリプトを気軽に編集したり試したりするのに時間がかかるので。 
+先ずは、Visual Studioを起動して、新しいプロジェクトを作成します。使うテンプレートは、”Stream Analytics” 
+![VSPTemplate](images/VSPTemplate.png) 
+このテンプレートを使ってプロジェクトを作成します。出来上がりは、
+![VSSolution](images/VSSolution.png)
+です。クラウドでの定義と構成は一緒です。先ず、入力を定義します。ソリューションエクスプローラでInput.jsonをクリックして、先ずは、TrackingPointを定義します。 
+![VSDefineInput1](images/VSDefineInput1.png) 
+次に、RegistragedPlacesを定義します。 図のようにソリューションエクスプローラで、Inputsフォルダーを右クリックし、追加→新しい項目で、Stream Analytics ItemsのInputを一個作り、図のように、設定します。 
+![VSDefineInput2](images/VSDefineInput2.png) 
+次に出力です。ソリューションエクスプローラで、Output.jsonをクリックして定義します。 
+![VSDefineOutput](images/VSDefineOutput.png) 
+後は、Script。図のように、Script.asaqlを選択して、スクリプトをコピペします。 
+![VSDefineScript](images/VSDefineScript.png) 
+ローカルでテストするには、テスト用データが必要です。 
+図のように、Input.jsonを右クリックして、”Add local input”を選択しテストデータを登録します。 
+![VSAddLocalInput](images/AddLocalTest.png) 
+位置情報については、MovingPointGeneratorWPFアプリを動かして、”Start Tracking”をクリック、ギターをマウスで動かして、”Save to File”をクリックすると作成可能です。 
+![CreateTrackingData](images/CreateTrackingData.png) 
+同様な手順で、RegistedPlaces.jsonにもテストデータ（ブロブとして登録したファイル）をセットします。 
+後は、”Run Locally”をクリックすれば、スクリプトをコンパイルして実行し、結果を表示してくれます。 
+![RunLocally](images/RunLocally.png) 
+いろいろと試してみてください。 

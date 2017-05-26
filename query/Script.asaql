@@ -5,7 +5,7 @@ WITH TP AS(
     lplaces.ArrayValue.id as placeId,
     lplaces.ArrayValue.latitude as rLatitude,
     lplaces.ArrayValue.longitude as rLongitude
- FROM RootTracking rt TIMESTAMP BY trackingTime
+ FROM TrackingPoint rt TIMESTAMP BY trackingTime
  JOIN RegistedPlaces r on rt.id = r.ThingeeId
  CROSS APPLY GetArrayElements(r.places) as lplaces
 )
